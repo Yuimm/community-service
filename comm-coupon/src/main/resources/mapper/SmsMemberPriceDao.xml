@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.coupon.dao.SmsMemberPriceDao">
+
+    <resultMap type="com.hct.comm.coupon.entity.SmsMemberPrice" id="SmsMemberPriceMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="skuId" column="sku_id" jdbcType="INTEGER"/>
+        <result property="memberLevelId" column="member_level_id" jdbcType="INTEGER"/>
+        <result property="memberLevelName" column="member_level_name" jdbcType="VARCHAR"/>
+        <result property="memberPrice" column="member_price" jdbcType="NUMERIC"/>
+        <result property="addOther" column="add_other" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SmsMemberPriceMap">
+        select
+          id, sku_id, member_level_id, member_level_name, member_price, add_other
+        from comm_sms.sms_member_price
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SmsMemberPriceMap">
+        select
+          id, sku_id, member_level_id, member_level_name, member_price, add_other
+        from comm_sms.sms_member_price
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SmsMemberPriceMap">
+        select
+          id, sku_id, member_level_id, member_level_name, member_price, add_other
+        from comm_sms.sms_member_price
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="skuId != null">
+                and sku_id = #{skuId}
+            </if>
+            <if test="memberLevelId != null">
+                and member_level_id = #{memberLevelId}
+            </if>
+            <if test="memberLevelName != null and memberLevelName != ''">
+                and member_level_name = #{memberLevelName}
+            </if>
+            <if test="memberPrice != null">
+                and member_price = #{memberPrice}
+            </if>
+            <if test="addOther != null">
+                and add_other = #{addOther}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_sms.sms_member_price(sku_id, member_level_id, member_level_name, member_price, add_other)
+        values (#{skuId}, #{memberLevelId}, #{memberLevelName}, #{memberPrice}, #{addOther})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_sms.sms_member_price
+        <set>
+            <if test="skuId != null">
+                sku_id = #{skuId},
+            </if>
+            <if test="memberLevelId != null">
+                member_level_id = #{memberLevelId},
+            </if>
+            <if test="memberLevelName != null and memberLevelName != ''">
+                member_level_name = #{memberLevelName},
+            </if>
+            <if test="memberPrice != null">
+                member_price = #{memberPrice},
+            </if>
+            <if test="addOther != null">
+                add_other = #{addOther},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_sms.sms_member_price where id = #{id}
+    </delete>
+
+</mapper>

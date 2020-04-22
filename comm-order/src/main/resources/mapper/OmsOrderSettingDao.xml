@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.order.dao.OmsOrderSettingDao">
+
+    <resultMap type="com.hct.comm.order.entity.OmsOrderSetting" id="OmsOrderSettingMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="flashOrderOvertime" column="flash_order_overtime" jdbcType="INTEGER"/>
+        <result property="normalOrderOvertime" column="normal_order_overtime" jdbcType="INTEGER"/>
+        <result property="confirmOvertime" column="confirm_overtime" jdbcType="INTEGER"/>
+        <result property="finishOvertime" column="finish_overtime" jdbcType="INTEGER"/>
+        <result property="commentOvertime" column="comment_overtime" jdbcType="INTEGER"/>
+        <result property="memberLevel" column="member_level" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="OmsOrderSettingMap">
+        select
+          id, flash_order_overtime, normal_order_overtime, confirm_overtime, finish_overtime, comment_overtime, member_level
+        from comm_oms.oms_order_setting
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="OmsOrderSettingMap">
+        select
+          id, flash_order_overtime, normal_order_overtime, confirm_overtime, finish_overtime, comment_overtime, member_level
+        from comm_oms.oms_order_setting
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="OmsOrderSettingMap">
+        select
+          id, flash_order_overtime, normal_order_overtime, confirm_overtime, finish_overtime, comment_overtime, member_level
+        from comm_oms.oms_order_setting
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="flashOrderOvertime != null">
+                and flash_order_overtime = #{flashOrderOvertime}
+            </if>
+            <if test="normalOrderOvertime != null">
+                and normal_order_overtime = #{normalOrderOvertime}
+            </if>
+            <if test="confirmOvertime != null">
+                and confirm_overtime = #{confirmOvertime}
+            </if>
+            <if test="finishOvertime != null">
+                and finish_overtime = #{finishOvertime}
+            </if>
+            <if test="commentOvertime != null">
+                and comment_overtime = #{commentOvertime}
+            </if>
+            <if test="memberLevel != null">
+                and member_level = #{memberLevel}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_oms.oms_order_setting(flash_order_overtime, normal_order_overtime, confirm_overtime, finish_overtime, comment_overtime, member_level)
+        values (#{flashOrderOvertime}, #{normalOrderOvertime}, #{confirmOvertime}, #{finishOvertime}, #{commentOvertime}, #{memberLevel})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_oms.oms_order_setting
+        <set>
+            <if test="flashOrderOvertime != null">
+                flash_order_overtime = #{flashOrderOvertime},
+            </if>
+            <if test="normalOrderOvertime != null">
+                normal_order_overtime = #{normalOrderOvertime},
+            </if>
+            <if test="confirmOvertime != null">
+                confirm_overtime = #{confirmOvertime},
+            </if>
+            <if test="finishOvertime != null">
+                finish_overtime = #{finishOvertime},
+            </if>
+            <if test="commentOvertime != null">
+                comment_overtime = #{commentOvertime},
+            </if>
+            <if test="memberLevel != null">
+                member_level = #{memberLevel},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_oms.oms_order_setting where id = #{id}
+    </delete>
+
+</mapper>

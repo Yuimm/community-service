@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.order.dao.OmsRefundInfoDao">
+
+    <resultMap type="com.hct.comm.order.entity.OmsRefundInfo" id="OmsRefundInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="orderReturnId" column="order_return_id" jdbcType="INTEGER"/>
+        <result property="refund" column="refund" jdbcType="NUMERIC"/>
+        <result property="refundSn" column="refund_sn" jdbcType="VARCHAR"/>
+        <result property="refundStatus" column="refund_status" jdbcType="OTHER"/>
+        <result property="refundChannel" column="refund_channel" jdbcType="OTHER"/>
+        <result property="refundContent" column="refund_content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="OmsRefundInfoMap">
+        select
+          id, order_return_id, refund, refund_sn, refund_status, refund_channel, refund_content
+        from comm_oms.oms_refund_info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="OmsRefundInfoMap">
+        select
+          id, order_return_id, refund, refund_sn, refund_status, refund_channel, refund_content
+        from comm_oms.oms_refund_info
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="OmsRefundInfoMap">
+        select
+          id, order_return_id, refund, refund_sn, refund_status, refund_channel, refund_content
+        from comm_oms.oms_refund_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orderReturnId != null">
+                and order_return_id = #{orderReturnId}
+            </if>
+            <if test="refund != null">
+                and refund = #{refund}
+            </if>
+            <if test="refundSn != null and refundSn != ''">
+                and refund_sn = #{refundSn}
+            </if>
+            <if test="refundStatus != null">
+                and refund_status = #{refundStatus}
+            </if>
+            <if test="refundChannel != null">
+                and refund_channel = #{refundChannel}
+            </if>
+            <if test="refundContent != null and refundContent != ''">
+                and refund_content = #{refundContent}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_oms.oms_refund_info(order_return_id, refund, refund_sn, refund_status, refund_channel, refund_content)
+        values (#{orderReturnId}, #{refund}, #{refundSn}, #{refundStatus}, #{refundChannel}, #{refundContent})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_oms.oms_refund_info
+        <set>
+            <if test="orderReturnId != null">
+                order_return_id = #{orderReturnId},
+            </if>
+            <if test="refund != null">
+                refund = #{refund},
+            </if>
+            <if test="refundSn != null and refundSn != ''">
+                refund_sn = #{refundSn},
+            </if>
+            <if test="refundStatus != null">
+                refund_status = #{refundStatus},
+            </if>
+            <if test="refundChannel != null">
+                refund_channel = #{refundChannel},
+            </if>
+            <if test="refundContent != null and refundContent != ''">
+                refund_content = #{refundContent},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_oms.oms_refund_info where id = #{id}
+    </delete>
+
+</mapper>

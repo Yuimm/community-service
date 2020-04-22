@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.coupon.dao.SmsCouponSpuCategoryRelationDao">
+
+    <resultMap type="com.hct.comm.coupon.entity.SmsCouponSpuCategoryRelation" id="SmsCouponSpuCategoryRelationMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="couponId" column="coupon_id" jdbcType="INTEGER"/>
+        <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+        <result property="categoryName" column="category_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SmsCouponSpuCategoryRelationMap">
+        select
+          id, coupon_id, category_id, category_name
+        from comm_sms.sms_coupon_spu_category_relation
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SmsCouponSpuCategoryRelationMap">
+        select
+          id, coupon_id, category_id, category_name
+        from comm_sms.sms_coupon_spu_category_relation
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SmsCouponSpuCategoryRelationMap">
+        select
+          id, coupon_id, category_id, category_name
+        from comm_sms.sms_coupon_spu_category_relation
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="couponId != null">
+                and coupon_id = #{couponId}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="categoryName != null and categoryName != ''">
+                and category_name = #{categoryName}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_sms.sms_coupon_spu_category_relation(coupon_id, category_id, category_name)
+        values (#{couponId}, #{categoryId}, #{categoryName})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_sms.sms_coupon_spu_category_relation
+        <set>
+            <if test="couponId != null">
+                coupon_id = #{couponId},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="categoryName != null and categoryName != ''">
+                category_name = #{categoryName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_sms.sms_coupon_spu_category_relation where id = #{id}
+    </delete>
+
+</mapper>

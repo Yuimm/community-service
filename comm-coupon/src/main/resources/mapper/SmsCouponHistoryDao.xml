@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.coupon.dao.SmsCouponHistoryDao">
+
+    <resultMap type="com.hct.comm.coupon.entity.SmsCouponHistory" id="SmsCouponHistoryMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="couponId" column="coupon_id" jdbcType="INTEGER"/>
+        <result property="memberId" column="member_id" jdbcType="INTEGER"/>
+        <result property="memberNickName" column="member_nick_name" jdbcType="VARCHAR"/>
+        <result property="getType" column="get_type" jdbcType="OTHER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="useType" column="use_type" jdbcType="OTHER"/>
+        <result property="useTime" column="use_time" jdbcType="TIMESTAMP"/>
+        <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+        <result property="orderSn" column="order_sn" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SmsCouponHistoryMap">
+        select
+          id, coupon_id, member_id, member_nick_name, get_type, create_time, use_type, use_time, order_id, order_sn
+        from comm_sms.sms_coupon_history
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SmsCouponHistoryMap">
+        select
+          id, coupon_id, member_id, member_nick_name, get_type, create_time, use_type, use_time, order_id, order_sn
+        from comm_sms.sms_coupon_history
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SmsCouponHistoryMap">
+        select
+          id, coupon_id, member_id, member_nick_name, get_type, create_time, use_type, use_time, order_id, order_sn
+        from comm_sms.sms_coupon_history
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="couponId != null">
+                and coupon_id = #{couponId}
+            </if>
+            <if test="memberId != null">
+                and member_id = #{memberId}
+            </if>
+            <if test="memberNickName != null and memberNickName != ''">
+                and member_nick_name = #{memberNickName}
+            </if>
+            <if test="getType != null">
+                and get_type = #{getType}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="useType != null">
+                and use_type = #{useType}
+            </if>
+            <if test="useTime != null">
+                and use_time = #{useTime}
+            </if>
+            <if test="orderId != null">
+                and order_id = #{orderId}
+            </if>
+            <if test="orderSn != null">
+                and order_sn = #{orderSn}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_sms.sms_coupon_history(coupon_id, member_id, member_nick_name, get_type, create_time, use_type, use_time, order_id, order_sn)
+        values (#{couponId}, #{memberId}, #{memberNickName}, #{getType}, #{createTime}, #{useType}, #{useTime}, #{orderId}, #{orderSn})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_sms.sms_coupon_history
+        <set>
+            <if test="couponId != null">
+                coupon_id = #{couponId},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId},
+            </if>
+            <if test="memberNickName != null and memberNickName != ''">
+                member_nick_name = #{memberNickName},
+            </if>
+            <if test="getType != null">
+                get_type = #{getType},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="useType != null">
+                use_type = #{useType},
+            </if>
+            <if test="useTime != null">
+                use_time = #{useTime},
+            </if>
+            <if test="orderId != null">
+                order_id = #{orderId},
+            </if>
+            <if test="orderSn != null">
+                order_sn = #{orderSn},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_sms.sms_coupon_history where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.member.dao.UmsMemberLevelDao">
+
+    <resultMap type="com.hct.comm.member.entity.UmsMemberLevel" id="UmsMemberLevelMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="growthPoint" column="growth_point" jdbcType="INTEGER"/>
+        <result property="defaultStatus" column="default_status" jdbcType="OTHER"/>
+        <result property="freeFreightPoint" column="free_freight_point" jdbcType="NUMERIC"/>
+        <result property="commentGrowthPoint" column="comment_growth_point" jdbcType="INTEGER"/>
+        <result property="priviledgeFreeFreight" column="priviledge_free_freight" jdbcType="OTHER"/>
+        <result property="priviledgeMemberPrice" column="priviledge_member_price" jdbcType="OTHER"/>
+        <result property="priviledgeBirthday" column="priviledge_birthday" jdbcType="OTHER"/>
+        <result property="note" column="note" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UmsMemberLevelMap">
+        select
+          id, name, growth_point, default_status, free_freight_point, comment_growth_point, priviledge_free_freight, priviledge_member_price, priviledge_birthday, note
+        from comm_ums.ums_member_level
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UmsMemberLevelMap">
+        select
+          id, name, growth_point, default_status, free_freight_point, comment_growth_point, priviledge_free_freight, priviledge_member_price, priviledge_birthday, note
+        from comm_ums.ums_member_level
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UmsMemberLevelMap">
+        select
+          id, name, growth_point, default_status, free_freight_point, comment_growth_point, priviledge_free_freight, priviledge_member_price, priviledge_birthday, note
+        from comm_ums.ums_member_level
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="growthPoint != null">
+                and growth_point = #{growthPoint}
+            </if>
+            <if test="defaultStatus != null">
+                and default_status = #{defaultStatus}
+            </if>
+            <if test="freeFreightPoint != null">
+                and free_freight_point = #{freeFreightPoint}
+            </if>
+            <if test="commentGrowthPoint != null">
+                and comment_growth_point = #{commentGrowthPoint}
+            </if>
+            <if test="priviledgeFreeFreight != null">
+                and priviledge_free_freight = #{priviledgeFreeFreight}
+            </if>
+            <if test="priviledgeMemberPrice != null">
+                and priviledge_member_price = #{priviledgeMemberPrice}
+            </if>
+            <if test="priviledgeBirthday != null">
+                and priviledge_birthday = #{priviledgeBirthday}
+            </if>
+            <if test="note != null and note != ''">
+                and note = #{note}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_ums.ums_member_level(name, growth_point, default_status, free_freight_point, comment_growth_point, priviledge_free_freight, priviledge_member_price, priviledge_birthday, note)
+        values (#{name}, #{growthPoint}, #{defaultStatus}, #{freeFreightPoint}, #{commentGrowthPoint}, #{priviledgeFreeFreight}, #{priviledgeMemberPrice}, #{priviledgeBirthday}, #{note})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_ums.ums_member_level
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="growthPoint != null">
+                growth_point = #{growthPoint},
+            </if>
+            <if test="defaultStatus != null">
+                default_status = #{defaultStatus},
+            </if>
+            <if test="freeFreightPoint != null">
+                free_freight_point = #{freeFreightPoint},
+            </if>
+            <if test="commentGrowthPoint != null">
+                comment_growth_point = #{commentGrowthPoint},
+            </if>
+            <if test="priviledgeFreeFreight != null">
+                priviledge_free_freight = #{priviledgeFreeFreight},
+            </if>
+            <if test="priviledgeMemberPrice != null">
+                priviledge_member_price = #{priviledgeMemberPrice},
+            </if>
+            <if test="priviledgeBirthday != null">
+                priviledge_birthday = #{priviledgeBirthday},
+            </if>
+            <if test="note != null and note != ''">
+                note = #{note},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_ums.ums_member_level where id = #{id}
+    </delete>
+
+</mapper>

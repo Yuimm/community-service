@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="comm_pms@47.114.156.221" uuid="17f7c10a-8b83-486b-ad0c-5d3c152f6b40">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://47.114.156.221:3306/comm_pms?rewriteBatchedStatements=true&amp;useSSL=false&amp;serverTimezone=GMT</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="comm_sms@47.114.156.221" uuid="790b7d44-ad0b-4c41-b007-9b28425b3a9e">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://47.114.156.221:3306/comm_sms?rewriteBatchedStatements=true&amp;useSSL=false&amp;serverTimezone=GMT</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="comm_oms@47.114.156.221" uuid="532f6839-2a4f-4f37-8756-451760936793">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://47.114.156.221:3306/comm_oms?rewriteBatchedStatements=true&amp;useSSL=false&amp;serverTimezone=GMT</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="comm_wms@47.114.156.221" uuid="9a235beb-4b8e-4dcf-b33b-f025d64ad164">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://47.114.156.221:3306/comm_wms?rewriteBatchedStatements=true&amp;useSSL=false&amp;serverTimezone=GMT</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="comm_ums@47.114.156.221" uuid="3aed1933-bfba-4166-8add-f10355b007bf">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://47.114.156.221:3306/comm_ums?rewriteBatchedStatements=true&amp;useSSL=false&amp;serverTimezone=GMT</jdbc-url>
+    </data-source>
+  </component>
+</project>

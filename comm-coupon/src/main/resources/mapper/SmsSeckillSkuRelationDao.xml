@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.coupon.dao.SmsSeckillSkuRelationDao">
+
+    <resultMap type="com.hct.comm.coupon.entity.SmsSeckillSkuRelation" id="SmsSeckillSkuRelationMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="promotionId" column="promotion_id" jdbcType="INTEGER"/>
+        <result property="promotionSessionId" column="promotion_session_id" jdbcType="INTEGER"/>
+        <result property="skuId" column="sku_id" jdbcType="INTEGER"/>
+        <result property="seckillPrice" column="seckill_price" jdbcType="NUMERIC"/>
+        <result property="seckillCount" column="seckill_count" jdbcType="NUMERIC"/>
+        <result property="seckillLimit" column="seckill_limit" jdbcType="NUMERIC"/>
+        <result property="seckillSort" column="seckill_sort" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SmsSeckillSkuRelationMap">
+        select
+          id, promotion_id, promotion_session_id, sku_id, seckill_price, seckill_count, seckill_limit, seckill_sort
+        from comm_sms.sms_seckill_sku_relation
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SmsSeckillSkuRelationMap">
+        select
+          id, promotion_id, promotion_session_id, sku_id, seckill_price, seckill_count, seckill_limit, seckill_sort
+        from comm_sms.sms_seckill_sku_relation
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SmsSeckillSkuRelationMap">
+        select
+          id, promotion_id, promotion_session_id, sku_id, seckill_price, seckill_count, seckill_limit, seckill_sort
+        from comm_sms.sms_seckill_sku_relation
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="promotionId != null">
+                and promotion_id = #{promotionId}
+            </if>
+            <if test="promotionSessionId != null">
+                and promotion_session_id = #{promotionSessionId}
+            </if>
+            <if test="skuId != null">
+                and sku_id = #{skuId}
+            </if>
+            <if test="seckillPrice != null">
+                and seckill_price = #{seckillPrice}
+            </if>
+            <if test="seckillCount != null">
+                and seckill_count = #{seckillCount}
+            </if>
+            <if test="seckillLimit != null">
+                and seckill_limit = #{seckillLimit}
+            </if>
+            <if test="seckillSort != null">
+                and seckill_sort = #{seckillSort}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_sms.sms_seckill_sku_relation(promotion_id, promotion_session_id, sku_id, seckill_price, seckill_count, seckill_limit, seckill_sort)
+        values (#{promotionId}, #{promotionSessionId}, #{skuId}, #{seckillPrice}, #{seckillCount}, #{seckillLimit}, #{seckillSort})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_sms.sms_seckill_sku_relation
+        <set>
+            <if test="promotionId != null">
+                promotion_id = #{promotionId},
+            </if>
+            <if test="promotionSessionId != null">
+                promotion_session_id = #{promotionSessionId},
+            </if>
+            <if test="skuId != null">
+                sku_id = #{skuId},
+            </if>
+            <if test="seckillPrice != null">
+                seckill_price = #{seckillPrice},
+            </if>
+            <if test="seckillCount != null">
+                seckill_count = #{seckillCount},
+            </if>
+            <if test="seckillLimit != null">
+                seckill_limit = #{seckillLimit},
+            </if>
+            <if test="seckillSort != null">
+                seckill_sort = #{seckillSort},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_sms.sms_seckill_sku_relation where id = #{id}
+    </delete>
+
+</mapper>

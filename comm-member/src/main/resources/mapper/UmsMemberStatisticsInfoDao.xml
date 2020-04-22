@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.member.dao.UmsMemberStatisticsInfoDao">
+
+    <resultMap type="com.hct.comm.member.entity.UmsMemberStatisticsInfo" id="UmsMemberStatisticsInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="memberId" column="member_id" jdbcType="INTEGER"/>
+        <result property="consumeAmount" column="consume_amount" jdbcType="NUMERIC"/>
+        <result property="couponAmount" column="coupon_amount" jdbcType="NUMERIC"/>
+        <result property="orderCount" column="order_count" jdbcType="INTEGER"/>
+        <result property="couponCount" column="coupon_count" jdbcType="INTEGER"/>
+        <result property="commentCount" column="comment_count" jdbcType="INTEGER"/>
+        <result property="returnOrderCount" column="return_order_count" jdbcType="INTEGER"/>
+        <result property="loginCount" column="login_count" jdbcType="INTEGER"/>
+        <result property="attendCount" column="attend_count" jdbcType="INTEGER"/>
+        <result property="fansCount" column="fans_count" jdbcType="INTEGER"/>
+        <result property="collectProductCount" column="collect_product_count" jdbcType="INTEGER"/>
+        <result property="collectSubjectCount" column="collect_subject_count" jdbcType="INTEGER"/>
+        <result property="collectCommentCount" column="collect_comment_count" jdbcType="INTEGER"/>
+        <result property="inviteFriendCount" column="invite_friend_count" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UmsMemberStatisticsInfoMap">
+        select
+          id, member_id, consume_amount, coupon_amount, order_count, coupon_count, comment_count, return_order_count, login_count, attend_count, fans_count, collect_product_count, collect_subject_count, collect_comment_count, invite_friend_count
+        from comm_ums.ums_member_statistics_info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UmsMemberStatisticsInfoMap">
+        select
+          id, member_id, consume_amount, coupon_amount, order_count, coupon_count, comment_count, return_order_count, login_count, attend_count, fans_count, collect_product_count, collect_subject_count, collect_comment_count, invite_friend_count
+        from comm_ums.ums_member_statistics_info
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UmsMemberStatisticsInfoMap">
+        select
+          id, member_id, consume_amount, coupon_amount, order_count, coupon_count, comment_count, return_order_count, login_count, attend_count, fans_count, collect_product_count, collect_subject_count, collect_comment_count, invite_friend_count
+        from comm_ums.ums_member_statistics_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="memberId != null">
+                and member_id = #{memberId}
+            </if>
+            <if test="consumeAmount != null">
+                and consume_amount = #{consumeAmount}
+            </if>
+            <if test="couponAmount != null">
+                and coupon_amount = #{couponAmount}
+            </if>
+            <if test="orderCount != null">
+                and order_count = #{orderCount}
+            </if>
+            <if test="couponCount != null">
+                and coupon_count = #{couponCount}
+            </if>
+            <if test="commentCount != null">
+                and comment_count = #{commentCount}
+            </if>
+            <if test="returnOrderCount != null">
+                and return_order_count = #{returnOrderCount}
+            </if>
+            <if test="loginCount != null">
+                and login_count = #{loginCount}
+            </if>
+            <if test="attendCount != null">
+                and attend_count = #{attendCount}
+            </if>
+            <if test="fansCount != null">
+                and fans_count = #{fansCount}
+            </if>
+            <if test="collectProductCount != null">
+                and collect_product_count = #{collectProductCount}
+            </if>
+            <if test="collectSubjectCount != null">
+                and collect_subject_count = #{collectSubjectCount}
+            </if>
+            <if test="collectCommentCount != null">
+                and collect_comment_count = #{collectCommentCount}
+            </if>
+            <if test="inviteFriendCount != null">
+                and invite_friend_count = #{inviteFriendCount}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_ums.ums_member_statistics_info(member_id, consume_amount, coupon_amount, order_count, coupon_count, comment_count, return_order_count, login_count, attend_count, fans_count, collect_product_count, collect_subject_count, collect_comment_count, invite_friend_count)
+        values (#{memberId}, #{consumeAmount}, #{couponAmount}, #{orderCount}, #{couponCount}, #{commentCount}, #{returnOrderCount}, #{loginCount}, #{attendCount}, #{fansCount}, #{collectProductCount}, #{collectSubjectCount}, #{collectCommentCount}, #{inviteFriendCount})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_ums.ums_member_statistics_info
+        <set>
+            <if test="memberId != null">
+                member_id = #{memberId},
+            </if>
+            <if test="consumeAmount != null">
+                consume_amount = #{consumeAmount},
+            </if>
+            <if test="couponAmount != null">
+                coupon_amount = #{couponAmount},
+            </if>
+            <if test="orderCount != null">
+                order_count = #{orderCount},
+            </if>
+            <if test="couponCount != null">
+                coupon_count = #{couponCount},
+            </if>
+            <if test="commentCount != null">
+                comment_count = #{commentCount},
+            </if>
+            <if test="returnOrderCount != null">
+                return_order_count = #{returnOrderCount},
+            </if>
+            <if test="loginCount != null">
+                login_count = #{loginCount},
+            </if>
+            <if test="attendCount != null">
+                attend_count = #{attendCount},
+            </if>
+            <if test="fansCount != null">
+                fans_count = #{fansCount},
+            </if>
+            <if test="collectProductCount != null">
+                collect_product_count = #{collectProductCount},
+            </if>
+            <if test="collectSubjectCount != null">
+                collect_subject_count = #{collectSubjectCount},
+            </if>
+            <if test="collectCommentCount != null">
+                collect_comment_count = #{collectCommentCount},
+            </if>
+            <if test="inviteFriendCount != null">
+                invite_friend_count = #{inviteFriendCount},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_ums.ums_member_statistics_info where id = #{id}
+    </delete>
+
+</mapper>

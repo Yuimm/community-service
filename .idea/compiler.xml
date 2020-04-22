@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="comm-ware" />
+        <module name="comm-product" />
+        <module name="demo" />
+        <module name="comm-coupon" />
+        <module name="renren-fast" />
+        <module name="comm-common" />
+        <module name="comm-member" />
+        <module name="comm-order" />
+        <module name="comm-gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="comm-common" target="1.8" />
+      <module name="demo" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="comm-common" options="-parameters" />
+      <module name="comm-coupon" options="-parameters" />
+      <module name="comm-gateway" options="-parameters" />
+      <module name="comm-member" options="-parameters" />
+      <module name="comm-order" options="-parameters" />
+      <module name="comm-product" options="-parameters" />
+      <module name="comm-ware" options="-parameters" />
+      <module name="demo" options="-parameters" />
+      <module name="renren-fast" options="-parameters" />
+    </option>
+  </component>
+</project>

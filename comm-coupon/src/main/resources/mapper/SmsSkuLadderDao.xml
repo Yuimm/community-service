@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.coupon.dao.SmsSkuLadderDao">
+
+    <resultMap type="com.hct.comm.coupon.entity.SmsSkuLadder" id="SmsSkuLadderMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="skuId" column="sku_id" jdbcType="INTEGER"/>
+        <result property="fullCount" column="full_count" jdbcType="INTEGER"/>
+        <result property="discount" column="discount" jdbcType="NUMERIC"/>
+        <result property="price" column="price" jdbcType="NUMERIC"/>
+        <result property="addOther" column="add_other" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SmsSkuLadderMap">
+        select
+          id, sku_id, full_count, discount, price, add_other
+        from comm_sms.sms_sku_ladder
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SmsSkuLadderMap">
+        select
+          id, sku_id, full_count, discount, price, add_other
+        from comm_sms.sms_sku_ladder
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SmsSkuLadderMap">
+        select
+          id, sku_id, full_count, discount, price, add_other
+        from comm_sms.sms_sku_ladder
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="skuId != null">
+                and sku_id = #{skuId}
+            </if>
+            <if test="fullCount != null">
+                and full_count = #{fullCount}
+            </if>
+            <if test="discount != null">
+                and discount = #{discount}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="addOther != null">
+                and add_other = #{addOther}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_sms.sms_sku_ladder(sku_id, full_count, discount, price, add_other)
+        values (#{skuId}, #{fullCount}, #{discount}, #{price}, #{addOther})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_sms.sms_sku_ladder
+        <set>
+            <if test="skuId != null">
+                sku_id = #{skuId},
+            </if>
+            <if test="fullCount != null">
+                full_count = #{fullCount},
+            </if>
+            <if test="discount != null">
+                discount = #{discount},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="addOther != null">
+                add_other = #{addOther},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_sms.sms_sku_ladder where id = #{id}
+    </delete>
+
+</mapper>

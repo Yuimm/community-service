@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hct.comm.member.dao.UmsMemberDao">
+
+    <resultMap type="com.hct.comm.member.entity.UmsMember" id="UmsMemberMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="levelId" column="level_id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="header" column="header" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="OTHER"/>
+        <result property="birth" column="birth" jdbcType="OTHER"/>
+        <result property="city" column="city" jdbcType="VARCHAR"/>
+        <result property="job" column="job" jdbcType="VARCHAR"/>
+        <result property="sign" column="sign" jdbcType="VARCHAR"/>
+        <result property="sourceType" column="source_type" jdbcType="OTHER"/>
+        <result property="integration" column="integration" jdbcType="INTEGER"/>
+        <result property="growth" column="growth" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="OTHER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UmsMemberMap">
+        select
+          id, level_id, username, password, nickname, mobile, email, header, gender, birth, city, job, sign, source_type, integration, growth, status, create_time
+        from comm_ums.ums_member
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UmsMemberMap">
+        select
+          id, level_id, username, password, nickname, mobile, email, header, gender, birth, city, job, sign, source_type, integration, growth, status, create_time
+        from comm_ums.ums_member
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UmsMemberMap">
+        select
+          id, level_id, username, password, nickname, mobile, email, header, gender, birth, city, job, sign, source_type, integration, growth, status, create_time
+        from comm_ums.ums_member
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="levelId != null">
+                and level_id = #{levelId}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="mobile != null and mobile != ''">
+                and mobile = #{mobile}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="header != null and header != ''">
+                and header = #{header}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="birth != null">
+                and birth = #{birth}
+            </if>
+            <if test="city != null and city != ''">
+                and city = #{city}
+            </if>
+            <if test="job != null and job != ''">
+                and job = #{job}
+            </if>
+            <if test="sign != null and sign != ''">
+                and sign = #{sign}
+            </if>
+            <if test="sourceType != null">
+                and source_type = #{sourceType}
+            </if>
+            <if test="integration != null">
+                and integration = #{integration}
+            </if>
+            <if test="growth != null">
+                and growth = #{growth}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into comm_ums.ums_member(level_id, username, password, nickname, mobile, email, header, gender, birth, city, job, sign, source_type, integration, growth, status, create_time)
+        values (#{levelId}, #{username}, #{password}, #{nickname}, #{mobile}, #{email}, #{header}, #{gender}, #{birth}, #{city}, #{job}, #{sign}, #{sourceType}, #{integration}, #{growth}, #{status}, #{createTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update comm_ums.ums_member
+        <set>
+            <if test="levelId != null">
+                level_id = #{levelId},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="mobile != null and mobile != ''">
+                mobile = #{mobile},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="header != null and header != ''">
+                header = #{header},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="birth != null">
+                birth = #{birth},
+            </if>
+            <if test="city != null and city != ''">
+                city = #{city},
+            </if>
+            <if test="job != null and job != ''">
+                job = #{job},
+            </if>
+            <if test="sign != null and sign != ''">
+                sign = #{sign},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType},
+            </if>
+            <if test="integration != null">
+                integration = #{integration},
+            </if>
+            <if test="growth != null">
+                growth = #{growth},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from comm_ums.ums_member where id = #{id}
+    </delete>
+
+</mapper>
